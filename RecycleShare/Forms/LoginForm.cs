@@ -38,6 +38,7 @@ namespace RecycleShare
 
             if (rol != null)
             {
+                int gelenId = db.GetUserIdByEmail(email);
                 MessageBox.Show("Giriþ Baþarýlý! Rol: " + rol);
                 this.Hide();
 
@@ -55,7 +56,7 @@ namespace RecycleShare
                         break;
 
                     case "user":
-                        UserForm userPage = new UserForm();
+                        UserForm userPage = new UserForm(gelenId);
                         userPage.Show();
                         break;
 
@@ -69,6 +70,11 @@ namespace RecycleShare
             {
                 MessageBox.Show("E-Mail veya Þifre hatalý!");
             }
+        }
+
+        private void txtUsername_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
