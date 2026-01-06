@@ -68,7 +68,7 @@
             panel1.Controls.Add(btnLogin);
             panel1.Controls.Add(txtUsername);
             panel1.Controls.Add(txtPassword);
-            panel1.Location = new Point(336, 172);
+            panel1.Location = new Point(341, 177);
             panel1.Name = "panel1";
             panel1.Size = new Size(200, 100);
             panel1.TabIndex = 4;
@@ -77,9 +77,11 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(875, 450);
+            ClientSize = new Size(884, 461);
             Controls.Add(panel1);
+            MaximumSize = new Size(900, 500);
             Name = "Form1";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Form1";
             panel1.ResumeLayout(false);
             panel1.PerformLayout();

@@ -186,5 +186,48 @@ namespace RecycleShare
         {
 
         }
+
+        private void btnRaporGor_Click(object sender, EventArgs e)
+        {
+            string raporMetni = "";
+
+            using (NpgsqlConnection conn = new NpgsqlConnection(connectionString))
+            {
+                try
+                {
+                    conn.Open();
+
+                    // SQL Fonksiyonunu çağıran sorgu
+                    // "SELECT fonksiyon_adi(@parametre)" şeklinde çağrılır.
+                    string query = "SELECT fn_aylik_cevresel_etki_raporu(@uid)";
+
+                    using (NpgsqlCommand cmd = new NpgsqlCommand(query, conn))
+                    {
+                        // Parametreyi ekliyoruz (Giriş yapan kullanıcının ID'si)
+                        cmd.Parameters.AddWithValue("@uid", _currentUserId);
+
+                        // Fonksiyon tek bir uzun metin döndürdüğü için ExecuteScalar kullanıyoruz
+                        object result = cmd.ExecuteScalar();
+
+                        if (result != null)
+                        {
+                            raporMetni = result.ToString();
+                        }
+                    }
+
+                    // Gelen raporu ekranda göster
+                    MessageBox.Show(raporMetni, "Çevresel Etki Raporunuz", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Rapor alınırken hata oluştu: " + ex.Message);
+                }
+            }
+        }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

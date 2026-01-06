@@ -8,7 +8,7 @@ namespace RecycleShare
     {
         // Bağlantı cümleni buraya yaz.
         // Veritabanı adının "recycle_db" olduğunu varsayıyorum, değilse değiştir.
-        private string connectionString = "Host=localhost;Port=5432;Username=postgres;Password=313131;Database=atik";
+        private string connectionString = "Host=localhost;Port=5432;Username=postgres;Password=15995161;Database=atik";
 
         // Giriş yaparken E-Mail ve Şifre kontrolü yapacağız
         public string Login(string email, string password)
