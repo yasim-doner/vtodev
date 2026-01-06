@@ -21,27 +21,27 @@ namespace RecycleShare
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            // Kullanýcýdan Email ve Þifre alýyoruz
-            string email = txtUsername.Text; // Formda "Kullanýcý Adý" kutusuna Email yazacaklar
+            // Kullanï¿½cï¿½dan Email ve ï¿½ifre alï¿½yoruz
+            string email = txtUsername.Text; // Formda "Kullanï¿½cï¿½ Adï¿½" kutusuna Email yazacaklar
             string sifre = txtPassword.Text;
 
             if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(sifre))
             {
-                MessageBox.Show("Lütfen E-Mail ve Þifre giriniz.");
+                MessageBox.Show("Lï¿½tfen E-Mail ve ï¿½ifre giriniz.");
                 return;
             }
 
             DatabaseHelper db = new DatabaseHelper();
 
-            // Veritabanýna sor: Bu mail ve þifreye sahip biri var mý?
+            // Veritabanï¿½na sor: Bu mail ve ï¿½ifreye sahip biri var mï¿½?
             string rol = db.Login(email, sifre);
 
             if (rol != null)
             {
-                MessageBox.Show("Giriþ Baþarýlý! Rol: " + rol);
+                MessageBox.Show("Giriï¿½ Baï¿½arï¿½lï¿½! Rol: " + rol);
                 this.Hide();
 
-                // Senin veritabanýndaki CHECK constraint'e göre roller: 'admin', 'user', 'toplayici'
+                // Senin veritabanï¿½ndaki CHECK constraint'e gï¿½re roller: 'admin', 'user', 'toplayici'
                 switch (rol)
                 {
                     case "admin":
@@ -60,14 +60,14 @@ namespace RecycleShare
                         break;
 
                     default:
-                        MessageBox.Show("Rolünüz sisteme tanýmlý deðil!");
+                        MessageBox.Show("Rolï¿½nï¿½z sisteme tanï¿½mlï¿½ deï¿½il!");
                         this.Show();
                         break;
                 }
             }
             else
             {
-                MessageBox.Show("E-Mail veya Þifre hatalý!");
+                MessageBox.Show("E-Mail veya ï¿½ifre hatalï¿½!");
             }
         }
     }
