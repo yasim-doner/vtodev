@@ -47,135 +47,153 @@
             // comboBox1
             // 
             comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(53, 57);
+            comboBox1.Location = new Point(434, 68);
             comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(289, 23);
+            comboBox1.Size = new Size(341, 25);
             comboBox1.TabIndex = 0;
             comboBox1.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(53, 29);
+            label1.Location = new Point(434, 35);
             label1.Name = "label1";
-            label1.Size = new Size(91, 15);
+            label1.Size = new Size(198, 19);
             label1.TabIndex = 1;
-            label1.Text = "Müsait Atık Ara:";
+            label1.Text = "Hangi atığı toplamak istersiniz?";
             label1.Click += label1_Click;
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(423, 295);
+            label2.Location = new Point(161, 182);
             label2.Name = "label2";
-            label2.Size = new Size(98, 15);
+            label2.Size = new Size(114, 19);
             label2.TabIndex = 3;
             label2.Text = "Bekleyen İşlemler";
             // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(423, 152);
+            label3.Location = new Point(478, 340);
             label3.Name = "label3";
-            label3.Size = new Size(84, 15);
+            label3.Size = new Size(97, 19);
             label3.TabIndex = 5;
             label3.Text = "Bitmiş İşlemler";
             // 
             // listBox2
             // 
             listBox2.FormattingEnabled = true;
-            listBox2.Location = new Point(423, 179);
+            listBox2.Location = new Point(478, 371);
             listBox2.Name = "listBox2";
-            listBox2.Size = new Size(297, 94);
+            listBox2.Size = new Size(297, 106);
             listBox2.TabIndex = 4;
             // 
             // button1
             // 
-            button1.Location = new Point(53, 97);
+            button1.BackColor = Color.FromArgb(52, 152, 219);
+            button1.FlatStyle = FlatStyle.Flat;
+            button1.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            button1.ForeColor = SystemColors.ButtonHighlight;
+            button1.Location = new Point(434, 113);
             button1.Name = "button1";
-            button1.Size = new Size(133, 23);
+            button1.Size = new Size(133, 26);
             button1.TabIndex = 6;
             button1.Text = "Atık Rezerve Et";
-            button1.UseVisualStyleBackColor = true;
+            button1.UseVisualStyleBackColor = false;
             button1.Click += button1_Click;
             // 
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(64, 233);
+            label4.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label4.ForeColor = Color.FromArgb(45, 52, 54);
+            label4.Location = new Point(49, 53);
             label4.Name = "label4";
-            label4.Size = new Size(63, 15);
+            label4.Size = new Size(90, 21);
             label4.TabIndex = 7;
             label4.Text = "Ad Soyad: ";
             // 
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(64, 265);
+            label5.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label5.ForeColor = Color.FromArgb(39, 174, 96);
+            label5.Location = new Point(49, 89);
             label5.Name = "label5";
-            label5.Size = new Size(40, 15);
+            label5.Size = new Size(57, 21);
             label5.TabIndex = 8;
             label5.Text = "Puan: ";
             // 
             // label6
             // 
             label6.AutoSize = true;
-            label6.Location = new Point(423, 20);
+            label6.Location = new Point(478, 182);
             label6.Name = "label6";
-            label6.Size = new Size(109, 15);
+            label6.Size = new Size(127, 19);
             label6.TabIndex = 10;
             label6.Text = "İptal Edilen İşlemler";
             // 
             // listBox3
             // 
             listBox3.FormattingEnabled = true;
-            listBox3.Location = new Point(423, 47);
+            listBox3.Location = new Point(478, 214);
             listBox3.Name = "listBox3";
-            listBox3.Size = new Size(297, 94);
+            listBox3.Size = new Size(297, 106);
             listBox3.TabIndex = 9;
             listBox3.SelectedIndexChanged += listBox3_SelectedIndexChanged;
             // 
             // checkedListBox1
             // 
             checkedListBox1.FormattingEnabled = true;
-            checkedListBox1.Location = new Point(423, 323);
+            checkedListBox1.Location = new Point(161, 214);
             checkedListBox1.Name = "checkedListBox1";
-            checkedListBox1.Size = new Size(297, 94);
+            checkedListBox1.Size = new Size(297, 284);
             checkedListBox1.TabIndex = 11;
             // 
             // button2
             // 
-            button2.Location = new Point(315, 346);
+            button2.BackColor = Color.FromArgb(52, 152, 219);
+            button2.FlatStyle = FlatStyle.Flat;
+            button2.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold);
+            button2.ForeColor = SystemColors.ControlLightLight;
+            button2.Location = new Point(31, 214);
             button2.Name = "button2";
-            button2.Size = new Size(75, 23);
+            button2.Size = new Size(108, 26);
             button2.TabIndex = 12;
             button2.Text = "Tamamla";
-            button2.UseVisualStyleBackColor = true;
+            button2.UseVisualStyleBackColor = false;
             button2.Click += button2_Click;
             // 
             // button3
             // 
-            button3.Location = new Point(315, 375);
+            button3.BackColor = Color.FromArgb(52, 152, 219);
+            button3.FlatStyle = FlatStyle.Flat;
+            button3.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold);
+            button3.ForeColor = SystemColors.ControlLightLight;
+            button3.Location = new Point(31, 247);
             button3.Name = "button3";
-            button3.Size = new Size(75, 23);
+            button3.Size = new Size(108, 26);
             button3.TabIndex = 13;
             button3.Text = "İptal Et";
-            button3.UseVisualStyleBackColor = true;
+            button3.UseVisualStyleBackColor = false;
             button3.Click += button3_Click;
             // 
             // textBox1
             // 
-            textBox1.Location = new Point(147, 26);
+            textBox1.BorderStyle = BorderStyle.FixedSingle;
+            textBox1.Location = new Point(638, 32);
             textBox1.Name = "textBox1";
-            textBox1.Size = new Size(100, 23);
+            textBox1.Size = new Size(200, 25);
             textBox1.TabIndex = 14;
             textBox1.TextChanged += textBox1_TextChanged;
             // 
             // ToplayiciForm
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(7F, 17F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            BackColor = Color.FromArgb(245, 247, 250);
+            ClientSize = new Size(884, 561);
             Controls.Add(textBox1);
             Controls.Add(button3);
             Controls.Add(button2);
@@ -190,8 +208,9 @@
             Controls.Add(label2);
             Controls.Add(label1);
             Controls.Add(comboBox1);
+            Font = new Font("Segoe UI", 10F);
             Name = "ToplayiciForm";
-            Text = "ToplayiciForm";
+            Text = "RecycleShare - Toplayıcı Paneli";
             ResumeLayout(false);
             PerformLayout();
         }

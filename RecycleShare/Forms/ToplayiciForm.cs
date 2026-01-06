@@ -25,6 +25,13 @@ namespace RecycleShare
             AtiklariGetir();
             getUserInfo();
             IslemleriListele();
+            // Butonları daha yumuşak yapalım
+            button1.FlatAppearance.BorderSize = 0;
+            button2.FlatAppearance.BorderSize = 0;
+            button3.FlatAppearance.BorderSize = 0;
+
+            // CheckedListBox'ı tek tıkla seçilebilir yapalım
+            checkedListBox1.CheckOnClick = true;
         }
 
         private void AtiklariGetir()
