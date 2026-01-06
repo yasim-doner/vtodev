@@ -47,5 +47,25 @@ namespace RecycleShare
 
             return userRole; // 'admin', 'user' veya 'toplayici' döner
         }
+
+        public int GetUserIdByEmail(string email)
+        {
+            int userId = 0;
+            using (NpgsqlConnection conn = new NpgsqlConnection(connectionString))
+            {
+                conn.Open();
+                string query = "SELECT kullanici_id FROM kullanicilar WHERE email = @mail";
+                using (NpgsqlCommand cmd = new NpgsqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@mail", email);
+                    object result = cmd.ExecuteScalar();
+                    if (result != null)
+                    {
+                        userId = Convert.ToInt32(result);
+                    }
+                }
+            }
+            return userId;
+        }
     }
 }
