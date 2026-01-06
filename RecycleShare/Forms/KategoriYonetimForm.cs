@@ -32,7 +32,7 @@ namespace RecycleShare.Forms
             using (NpgsqlConnection conn = new NpgsqlConnection(connectionString))
             {
                 conn.Open();
-                string query = "SELECT kategori_id, kategori_adi, birim_puan FROM atik_kategorileri ORDER BY kategori_id ASC";
+                string query = "SELECT * FROM vw_kategori_vitrini ORDER BY kategori_id ASC";
                 NpgsqlDataAdapter da = new NpgsqlDataAdapter(query, conn);
                 DataTable dt = new DataTable();
                 da.Fill(dt);
@@ -131,6 +131,11 @@ namespace RecycleShare.Forms
                     }
                 }
             }
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }
