@@ -118,6 +118,7 @@
             Controls.Add(panel1);
             Name = "AdminForm";
             Text = "AdminForm";
+            Load += AdminForm_Load;
             panel1.ResumeLayout(false);
             ResumeLayout(false);
         }

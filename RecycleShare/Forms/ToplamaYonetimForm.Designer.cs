@@ -52,6 +52,7 @@
             btnSil.TabIndex = 12;
             btnSil.Text = "Sil";
             btnSil.UseVisualStyleBackColor = false;
+            btnSil.Click += btnSil_Click;
             // 
             // btnEkle
             // 
@@ -107,6 +108,7 @@
             dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dataGridView1.Size = new Size(456, 150);
             dataGridView1.TabIndex = 6;
+            dataGridView1.CellContentClick += dataGridView1_CellContentClick;
             // 
             // txtAdres
             // 
@@ -161,6 +163,7 @@
             Controls.Add(dataGridView1);
             Name = "ToplamaYonetimForm";
             Text = "ToplamaYonetimForm";
+            Load += ToplamaYonetimForm_Load;
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ResumeLayout(false);
             PerformLayout();

@@ -38,7 +38,7 @@ namespace RecycleShare.Forms
                 {
                     conn.Open();
                     // Tablonun tüm sütunlarını çekiyoruz
-                    string query = "SELECT nokta_id, ilce, mahalle, tam_adres, telefon FROM toplama_noktalari ORDER BY ilce, mahalle";
+                    string query = "SELECT * FROM vw_nokta_vitrini ORDER BY nokta_id ASC";
 
                     NpgsqlDataAdapter da = new NpgsqlDataAdapter(query, conn);
                     DataTable dt = new DataTable();
@@ -160,6 +160,11 @@ namespace RecycleShare.Forms
             txtMahalle.Clear();
             txtAdres.Clear();
             txtTelefon.Clear();
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }
