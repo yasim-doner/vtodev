@@ -28,5 +28,26 @@ namespace RecycleShare
             KategoriYonetimForm kategoriSayfasi = new KategoriYonetimForm();
             kategoriSayfasi.ShowDialog();
         }
+        private void btnToplama_Click(object sender, EventArgs e)
+        {
+            ToplamaYonetimForm toplamaSayfasi = new ToplamaYonetimForm();
+            toplamaSayfasi.ShowDialog();
+        }
+        private void btnKullanicilar_Click(object sender, EventArgs e)
+        {
+            ToplamaYonetimForm toplamaSayfasi = new ToplamaYonetimForm();
+            toplamaSayfasi.ShowDialog();
+        }
+        private void btnAtiklar_Click(object sender, EventArgs e)
+        {
+            ToplamaYonetimForm toplamaSayfasi = new ToplamaYonetimForm();
+            toplamaSayfasi.ShowDialog();
+        }
+
+        private void btnIslemler_Click(object sender, EventArgs e)
+        {
+            ToplamaYonetimForm toplamaSayfasi = new ToplamaYonetimForm();
+            toplamaSayfasi.ShowDialog();
+        }
     }
 }

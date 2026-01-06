@@ -30,9 +30,9 @@
         {
             panel1 = new Panel();
             btnKullanicilar = new Button();
-            button4 = new Button();
-            button3 = new Button();
-            button2 = new Button();
+            btnAtiklar = new Button();
+            btnIslemler = new Button();
+            btnToplama = new Button();
             btnKategori = new Button();
             panel1.SuspendLayout();
             SuspendLayout();
@@ -41,9 +41,9 @@
             // 
             panel1.Anchor = AnchorStyles.None;
             panel1.Controls.Add(btnKullanicilar);
-            panel1.Controls.Add(button4);
-            panel1.Controls.Add(button3);
-            panel1.Controls.Add(button2);
+            panel1.Controls.Add(btnAtiklar);
+            panel1.Controls.Add(btnIslemler);
+            panel1.Controls.Add(btnToplama);
             panel1.Controls.Add(btnKategori);
             panel1.Location = new Point(291, 82);
             panel1.Name = "panel1";
@@ -60,43 +60,43 @@
             btnKullanicilar.TabIndex = 0;
             btnKullanicilar.Text = "Kullanıcılar";
             btnKullanicilar.UseVisualStyleBackColor = false;
-            btnKullanicilar.Click += button2_Click;
+            btnKullanicilar.Click += btnKullanicilar_Click;
             // 
-            // button4
+            // btnAtiklar
             // 
-            button4.BackColor = Color.SandyBrown;
-            button4.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            button4.Location = new Point(45, 222);
-            button4.Name = "button4";
-            button4.Size = new Size(211, 46);
-            button4.TabIndex = 0;
-            button4.Text = "Atıklar";
-            button4.UseVisualStyleBackColor = false;
-            button4.Click += button2_Click;
+            btnAtiklar.BackColor = Color.SandyBrown;
+            btnAtiklar.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            btnAtiklar.Location = new Point(45, 222);
+            btnAtiklar.Name = "btnAtiklar";
+            btnAtiklar.Size = new Size(211, 46);
+            btnAtiklar.TabIndex = 0;
+            btnAtiklar.Text = "Atıklar";
+            btnAtiklar.UseVisualStyleBackColor = false;
+            btnAtiklar.Click += btnAtiklar_Click;
             // 
-            // button3
+            // btnIslemler
             // 
-            button3.BackColor = Color.SandyBrown;
-            button3.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            button3.Location = new Point(45, 160);
-            button3.Name = "button3";
-            button3.Size = new Size(211, 46);
-            button3.TabIndex = 0;
-            button3.Text = "Mevcut İşlemler";
-            button3.UseVisualStyleBackColor = false;
-            button3.Click += button2_Click;
+            btnIslemler.BackColor = Color.SandyBrown;
+            btnIslemler.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            btnIslemler.Location = new Point(45, 160);
+            btnIslemler.Name = "btnIslemler";
+            btnIslemler.Size = new Size(211, 46);
+            btnIslemler.TabIndex = 0;
+            btnIslemler.Text = "Mevcut İşlemler";
+            btnIslemler.UseVisualStyleBackColor = false;
+            btnIslemler.Click += btnIslemler_Click;
             // 
-            // button2
+            // btnToplama
             // 
-            button2.BackColor = Color.SandyBrown;
-            button2.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            button2.Location = new Point(45, 95);
-            button2.Name = "button2";
-            button2.Size = new Size(211, 46);
-            button2.TabIndex = 0;
-            button2.Text = "Toplama Noktaları";
-            button2.UseVisualStyleBackColor = false;
-            button2.Click += button2_Click;
+            btnToplama.BackColor = Color.SandyBrown;
+            btnToplama.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            btnToplama.Location = new Point(45, 95);
+            btnToplama.Name = "btnToplama";
+            btnToplama.Size = new Size(211, 46);
+            btnToplama.TabIndex = 0;
+            btnToplama.Text = "Toplama Noktaları";
+            btnToplama.UseVisualStyleBackColor = false;
+            btnToplama.Click += btnToplama_Click;
             // 
             // btnKategori
             // 
@@ -126,9 +126,9 @@
 
         private Panel panel1;
         private Button btnKategori;
-        private Button button2;
+        private Button btnToplama;
         private Button btnKullanicilar;
-        private Button button4;
-        private Button button3;
+        private Button btnAtiklar;
+        private Button btnIslemler;
     }
 }

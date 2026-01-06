@@ -74,19 +74,21 @@ namespace RecycleShare.Forms
 
         private void btnSil_Click(object sender, EventArgs e)
         {
-            // 1. Seçim Kontrolü
+            // 1. KONTROL: Kullanıcı listeden bir şeye tıklamış mı?
             if (dataGridView1.CurrentRow == null)
             {
-                MessageBox.Show("Lütfen silinecek satırı seçin.", "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Dayı önce listeden silinecek satıra bir tıkla.");
                 return;
             }
 
+            // 2. VERİYİ ALMA: Seçili satırdan ID'yi ve Adı çekiyoruz
+            // (Arka planda "kategori_id" hücresini okuyoruz)
             int seciliId = Convert.ToInt32(dataGridView1.CurrentRow.Cells["kategori_id"].Value);
             string kategoriAdi = dataGridView1.CurrentRow.Cells["kategori_adi"].Value.ToString();
 
-            // 2. Kullanıcı Onayı
+            // 3. ONAY: Yanlışlıkla basarsa diye soralım
             DialogResult cevap = MessageBox.Show(
-                $"{kategoriAdi} kategorisini silmek istediğinize emin misiniz?",
+                $"{kategoriAdi} kategorisini silmek istiyor musun?",
                 "Silme Onayı",
                 MessageBoxButtons.YesNo,
                 MessageBoxIcon.Question);
@@ -98,6 +100,8 @@ namespace RecycleShare.Forms
                     try
                     {
                         conn.Open();
+
+                        // ID'ye göre silme işlemi
                         string query = "DELETE FROM atik_kategorileri WHERE kategori_id = @id";
 
                         using (NpgsqlCommand cmd = new NpgsqlCommand(query, conn))
@@ -106,37 +110,24 @@ namespace RecycleShare.Forms
                             cmd.ExecuteNonQuery();
                         }
 
-                        MessageBox.Show("Kategori başarıyla silindi.", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        Listele();
+                        MessageBox.Show("Temizlendi!");
+                        Listele(); // Listeyi yenile ki silinen satır ekrandan gitsin
                     }
                     catch (PostgresException ex)
                     {
-                        // ÖZEL SQL DURUMLARI (Güvenli Mesajlar)
-
-                        // 23503: Foreign Key Violation (Bağlı veri hatası)
-                        // Bu kod, senin tablonun "RESTRICT" özelliğinden dolayı fırlatılır.
-                        if (ex.SqlState == "23503")
+                        // 23503: Foreign Key Violation
+                        // 23001: Restrict Violation (Senin aldığın hata bu)
+                        if (ex.SqlState == "23503" || ex.SqlState == "23001")
                         {
                             MessageBox.Show("Bu kategoriyi SİLEMEZSİNİZ.\n\nSebep: Bu kategoriye ait sistemde kayıtlı atıklar mevcut. Veri güvenliği için önce o atıkların silinmesi gerekir.",
                                             "İşlem Engellendi", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                         }
                         else
                         {
-                            // DİĞER SQL HATALARI (Else Kısmı)
-                            // BURAYI GÜVENLİ HALE GETİRDİK:
-                            // Kullanıcıya "ex.Message" göstermiyoruz! Sadece genel bilgi veriyoruz.
-                            MessageBox.Show("İşlem sırasında teknik bir veritabanı hatası oluştu.\nLütfen sistem yöneticisine başvurun.",
+                            // Diğer teknik hatalar
+                            MessageBox.Show("İşlem sırasında teknik bir veritabanı hatası oluştu.\nHata Kodu: " + ex.SqlState,
                                             "Teknik Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
-                            // Geliştirici notu: Gerçek hatayı log dosyasına yazabilirsin ama ekrana basma.
-                            // Console.WriteLine(ex.Message); 
                         }
-                    }
-                    catch (Exception ex)
-                    {
-                        // SQL DIŞI HATALAR (Kod hatası, dönüştürme hatası vb.)
-                        // Burada da teknik detay vermiyoruz.
-                        MessageBox.Show("Beklenmedik bir hata oluştu.", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
             }
