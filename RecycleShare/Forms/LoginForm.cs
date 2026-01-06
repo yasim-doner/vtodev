@@ -51,7 +51,7 @@ namespace RecycleShare
                         break;
 
                     case "toplayici":
-                        ToplayiciForm toplayiciPage = new ToplayiciForm();
+                        ToplayiciForm toplayiciPage = new ToplayiciForm(gelenId);
                         toplayiciPage.Show();
                         break;
 
