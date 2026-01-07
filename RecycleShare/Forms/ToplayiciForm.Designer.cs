@@ -42,6 +42,7 @@
             button2 = new Button();
             button3 = new Button();
             textBox1 = new TextBox();
+            button4 = new Button();
             SuspendLayout();
             // 
             // comboBox1
@@ -188,12 +189,27 @@
             textBox1.TabIndex = 14;
             textBox1.TextChanged += textBox1_TextChanged;
             // 
+            // button4
+            // 
+            button4.BackColor = Color.FromArgb(52, 152, 219);
+            button4.FlatStyle = FlatStyle.Flat;
+            button4.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold);
+            button4.ForeColor = SystemColors.ControlLightLight;
+            button4.Location = new Point(593, 113);
+            button4.Name = "button4";
+            button4.Size = new Size(245, 26);
+            button4.TabIndex = 15;
+            button4.Text = "Müsait Olmayan Atıkları Göster";
+            button4.UseVisualStyleBackColor = false;
+            button4.Click += button4_Click;
+            // 
             // ToplayiciForm
             // 
             AutoScaleDimensions = new SizeF(7F, 17F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(245, 247, 250);
             ClientSize = new Size(884, 561);
+            Controls.Add(button4);
             Controls.Add(textBox1);
             Controls.Add(button3);
             Controls.Add(button2);
@@ -231,5 +247,6 @@
         private Button button2;
         private Button button3;
         private TextBox textBox1;
+        private Button button4;
     }
 }
