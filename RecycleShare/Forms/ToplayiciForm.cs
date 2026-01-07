@@ -218,7 +218,7 @@ namespace RecycleShare
                         // PostgreSQL'den gelen RAISE NOTICE mesajı ev.Notice.MessageText içindedir
                         MessageBox.Show(ev.Notice.MessageText, "Sistem Mesajı", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     };
-                       
+
                     conn.Open();
 
                     // Bu satır hayati önem taşıyor, notice'leri görünür yapar
@@ -426,6 +426,53 @@ namespace RecycleShare
             {
                 // Hata yönetimini burada yapabilirsin
                 Console.WriteLine("Arama hatası: " + ex.Message);
+            }
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                using (NpgsqlConnection conn = new NpgsqlConnection(connectionString))
+                {
+                    conn.Open();
+                    string query = "SELECT \"atik_id\", \"baslik\", \"aciklama\", \"miktar_kg\" FROM \"atiklar\" WHERE \"durum\" = 'rezerv' " +
+                   " UNION " +
+                   " SELECT \"atik_id\", \"baslik\", \"aciklama\", \"miktar_kg\" FROM \"atiklar\" WHERE \"durum\" = 'tamamlandi'";
+
+                    using (NpgsqlCommand cmd = new NpgsqlCommand(query, conn))
+                    {
+                        using (NpgsqlDataReader dr = cmd.ExecuteReader())
+                        {
+                            string mesaj = "Müsait Olmayan Atıklar Listesi:\n\n";
+                            bool veriVarMi = false;
+
+                            while (dr.Read())
+                            {
+                                veriVarMi = true;
+                                // Sütunları sırasıyla okuyoruz
+                                mesaj += $"ID: {dr["atik_id"]} | ";
+                                mesaj += $"Başlık: {dr["baslik"]} | ";
+                                mesaj += $"Açıklama: {dr["aciklama"]} | ";
+                                mesaj += $"Miktar: {dr["miktar_kg"]} kg\n";
+                                mesaj += "---------------------------------\n";
+                            }
+
+                            if (veriVarMi)
+                            {
+                                MessageBox.Show(mesaj, "Müsait Olmayan Atıklar", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            }
+                            else
+                            {
+                                MessageBox.Show("Uygun durumda atık bulunamadı.", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Hata oluştu: " + ex.Message);
             }
         }
     }
