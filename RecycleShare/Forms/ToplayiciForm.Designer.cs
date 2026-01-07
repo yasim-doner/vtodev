@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ToplayiciForm));
             comboBox1 = new ComboBox();
             label1 = new Label();
             label2 = new Label();
@@ -43,6 +44,7 @@
             button3 = new Button();
             textBox1 = new TextBox();
             button4 = new Button();
+            btnExit = new Button();
             SuspendLayout();
             // 
             // comboBox1
@@ -203,12 +205,25 @@
             button4.UseVisualStyleBackColor = false;
             button4.Click += button4_Click;
             // 
+            // btnExit
+            // 
+            btnExit.BackColor = Color.CornflowerBlue;
+            btnExit.BackgroundImage = (Image)resources.GetObject("btnExit.BackgroundImage");
+            btnExit.BackgroundImageLayout = ImageLayout.Stretch;
+            btnExit.Location = new Point(806, 497);
+            btnExit.Name = "btnExit";
+            btnExit.Size = new Size(52, 52);
+            btnExit.TabIndex = 16;
+            btnExit.UseVisualStyleBackColor = false;
+            btnExit.Click += btnExit_Click;
+            // 
             // ToplayiciForm
             // 
             AutoScaleDimensions = new SizeF(7F, 17F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(245, 247, 250);
             ClientSize = new Size(884, 561);
+            Controls.Add(btnExit);
             Controls.Add(button4);
             Controls.Add(textBox1);
             Controls.Add(button3);
@@ -248,5 +263,6 @@
         private Button button3;
         private TextBox textBox1;
         private Button button4;
+        private Button btnExit;
     }
 }

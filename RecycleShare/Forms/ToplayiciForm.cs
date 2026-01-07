@@ -475,6 +475,29 @@ namespace RecycleShare
                 MessageBox.Show("Hata oluştu: " + ex.Message);
             }
         }
+
+        private void btnExit_Click(object sender, EventArgs e)
+        {
+            DialogResult cevap = MessageBox.Show(
+            "Oturumu kapatmak istediğinize emin misiniz?",
+            "Çıkış Yap",
+            MessageBoxButtons.YesNo,
+            MessageBoxIcon.Question);
+
+            if (cevap == DialogResult.Yes)
+            {
+                // 1. HAFIZAYI TEMİZLE (Rolü sıfırla)
+                // Bunu yapmazsan bir sonraki giren kişi eski yetkilerle kalabilir!
+                Session.Reset();
+
+                // 2. Login Ekranını Aç
+                Form1 loginEkrani = new Form1();
+                loginEkrani.Show();
+
+                // 3. Mevcut Sayfayı Kapat
+                this.Close();
+            }
+        }
     }
 
     public class ListeEleman
