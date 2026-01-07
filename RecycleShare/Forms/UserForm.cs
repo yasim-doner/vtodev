@@ -13,33 +13,34 @@ namespace RecycleShare
 {
     public partial class UserForm : Form
     {
-
         private int _currentUserId;
 
-        // Veritabanı bağlantı cümlen (Kendi şifreni kontrol et)
-        string connectionString = "Server=localhost;Port=5432;Database=atik;User Id=postgres;Password=15995161;";
+        // ARTIK BAĞLANTI CÜMLESİNE BURADA GEREK YOK.
+        // DatabaseHelper sınıfı hallediyor.
 
-        // CONSTRUCTOR (KURUCU METOT) - Form1'den maili burada alıyoruz
         public UserForm(int userId)
         {
             InitializeComponent();
-            _currentUserId = userId; // Maili içeri aldık
+            _currentUserId = userId;
         }
 
         private void UserForm_Load(object sender, EventArgs e)
         {
-            // Form açılınca ComboBox'ları ve Listeyi doldur
             KategorileriDoldur();
             ToplamaNoktalariniDoldur();
             AtiklariListele();
         }
 
-        // 1. Kategorileri ComboBox'a Doldurma
+        // 1. Kategorileri Doldur
         private void KategorileriDoldur()
         {
-            using (NpgsqlConnection conn = new NpgsqlConnection(connectionString))
+            DatabaseHelper db = new DatabaseHelper();
+
+            // DİKKAT: GetAuthorizedConnection() hem bağlantıyı açar hem yetkiyi ayarlar.
+            using (NpgsqlConnection conn = db.GetAuthorizedConnection())
             {
-                conn.Open();
+                // conn.Open();  <-- BU SATIRI SİLDİK, ZATEN AÇIK GELİYOR
+
                 string query = "SELECT kategori_id, kategori_adi FROM atik_kategorileri ORDER BY kategori_adi";
                 NpgsqlDataAdapter da = new NpgsqlDataAdapter(query, conn);
                 DataTable dt = new DataTable();
@@ -48,18 +49,21 @@ namespace RecycleShare
                 cmbKategori.DisplayMember = "kategori_adi";
                 cmbKategori.ValueMember = "kategori_id";
                 cmbKategori.DataSource = dt;
-                cmbKategori.SelectedIndex = -1; // Boş gelsin
+                cmbKategori.SelectedIndex = -1;
             }
         }
 
-        // 2. Toplama Noktalarını ComboBox'a Doldurma
+        // 2. Toplama Noktalarını Doldur
         private void ToplamaNoktalariniDoldur()
         {
-            using (NpgsqlConnection conn = new NpgsqlConnection(connectionString))
+            DatabaseHelper db = new DatabaseHelper();
+
+            using (NpgsqlConnection conn = db.GetAuthorizedConnection())
             {
-                conn.Open();
                 // Kullanıcıya İlçe ve Mahalle bilgisini birleştirip gösteriyoruz
+                // NOT: Burada 'vw_nokta_vitrini' view'ını kullanırsan daha şık olur ama tablo da çalışır.
                 string query = "SELECT nokta_id, (ilce || ' - ' || mahalle) AS gorunen_isim FROM toplama_noktalari";
+
                 NpgsqlDataAdapter da = new NpgsqlDataAdapter(query, conn);
                 DataTable dt = new DataTable();
                 da.Fill(dt);
@@ -67,26 +71,17 @@ namespace RecycleShare
                 cmbToplamaNoktasi.DisplayMember = "gorunen_isim";
                 cmbToplamaNoktasi.ValueMember = "nokta_id";
                 cmbToplamaNoktasi.DataSource = dt;
-                cmbToplamaNoktasi.SelectedIndex = -1; // Boş gelsin (Boşsa EV demektir)
+                cmbToplamaNoktasi.SelectedIndex = -1;
             }
         }
-
-        // 3. Mail Adresinden User ID Bulma Fonksiyonu
-
 
         // 4. KAYDET BUTONU
         private void btnAtikEkle_Click(object sender, EventArgs e)
         {
+            // Session'dan gelen ID ile constructor'dan gelen ID aynıdır.
+            // Güvenlik için Session.UserId de kullanabilirsin ama bu da doğru.
             int currentUserId = _currentUserId;
 
-            if (currentUserId == 0)
-            {
-                MessageBox.Show("Kullanıcı bulunamadı, lütfen tekrar giriş yapın.");
-                this.Close();
-                return;
-            }
-
-            // Kategori Seçili mi?
             if (cmbKategori.SelectedValue == null)
             {
                 MessageBox.Show("Lütfen bir kategori seçin.");
@@ -104,16 +99,17 @@ namespace RecycleShare
                 return;
             }
 
-            // Toplama Noktası Seçili Değilse NULL (Ev) Olacak
             object noktaId = DBNull.Value;
             if (cmbToplamaNoktasi.SelectedIndex != -1)
             {
                 noktaId = (int)cmbToplamaNoktasi.SelectedValue;
             }
 
-            using (NpgsqlConnection conn = new NpgsqlConnection(connectionString))
+            DatabaseHelper db = new DatabaseHelper();
+
+            // YETKİLİ BAĞLANTIYI ALIYORUZ
+            using (NpgsqlConnection conn = db.GetAuthorizedConnection())
             {
-                conn.Open();
                 string query = @"INSERT INTO atiklar (kullanici_id, kategori_id, nokta_id, baslik, aciklama, miktar_kg) 
                                  VALUES (@uid, @katId, @noktaId, @baslik, @aciklama, @miktar)";
 
@@ -131,19 +127,17 @@ namespace RecycleShare
             }
 
             MessageBox.Show("Atık başarıyla eklendi!");
-            AtiklariListele(); // Listeyi güncelle
-            Temizle(); // Kutuları boşalt
+            AtiklariListele();
+            Temizle();
         }
 
-        // 5. Grid Listeleme (Kendi Eklediklerini Görsün)
+        // 5. Grid Listeleme
         private void AtiklariListele()
         {
-            int currentUserId = _currentUserId;
+            DatabaseHelper db = new DatabaseHelper();
 
-
-            using (NpgsqlConnection conn = new NpgsqlConnection(connectionString))
+            using (NpgsqlConnection conn = db.GetAuthorizedConnection())
             {
-                conn.Open();
                 string query = @"
                     SELECT 
                         a.baslik AS ""Başlık"",
@@ -160,10 +154,42 @@ namespace RecycleShare
 
                 using (NpgsqlDataAdapter da = new NpgsqlDataAdapter(query, conn))
                 {
-                    da.SelectCommand.Parameters.AddWithValue("@uid", currentUserId);
+                    da.SelectCommand.Parameters.AddWithValue("@uid", _currentUserId);
                     DataTable dt = new DataTable();
                     da.Fill(dt);
                     dataGridView1.DataSource = dt;
+                }
+            }
+        }
+
+        private void btnRaporGor_Click(object sender, EventArgs e)
+        {
+            string raporMetni = "";
+            DatabaseHelper db = new DatabaseHelper();
+
+            using (NpgsqlConnection conn = db.GetAuthorizedConnection())
+            {
+                try
+                {
+                    // Fonksiyon çağırma
+                    string query = "SELECT fn_aylik_cevresel_etki_raporu(@uid)";
+
+                    using (NpgsqlCommand cmd = new NpgsqlCommand(query, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@uid", _currentUserId);
+                        object result = cmd.ExecuteScalar();
+
+                        if (result != null)
+                        {
+                            raporMetni = result.ToString();
+                        }
+                    }
+
+                    MessageBox.Show(raporMetni, "Çevresel Etki Raporunuz", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Rapor alınırken hata oluştu: " + ex.Message);
                 }
             }
         }
@@ -177,57 +203,8 @@ namespace RecycleShare
             cmbToplamaNoktasi.SelectedIndex = -1;
         }
 
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnRaporGor_Click(object sender, EventArgs e)
-        {
-            string raporMetni = "";
-
-            using (NpgsqlConnection conn = new NpgsqlConnection(connectionString))
-            {
-                try
-                {
-                    conn.Open();
-
-                    // SQL Fonksiyonunu çağıran sorgu
-                    // "SELECT fonksiyon_adi(@parametre)" şeklinde çağrılır.
-                    string query = "SELECT fn_aylik_cevresel_etki_raporu(@uid)";
-
-                    using (NpgsqlCommand cmd = new NpgsqlCommand(query, conn))
-                    {
-                        // Parametreyi ekliyoruz (Giriş yapan kullanıcının ID'si)
-                        cmd.Parameters.AddWithValue("@uid", _currentUserId);
-
-                        // Fonksiyon tek bir uzun metin döndürdüğü için ExecuteScalar kullanıyoruz
-                        object result = cmd.ExecuteScalar();
-
-                        if (result != null)
-                        {
-                            raporMetni = result.ToString();
-                        }
-                    }
-
-                    // Gelen raporu ekranda göster
-                    MessageBox.Show(raporMetni, "Çevresel Etki Raporunuz", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Rapor alınırken hata oluştu: " + ex.Message);
-                }
-            }
-        }
-
-        private void label4_Click(object sender, EventArgs e)
-        {
-
-        }
+        private void label1_Click(object sender, EventArgs e) { }
+        private void label2_Click(object sender, EventArgs e) { }
+        private void label4_Click(object sender, EventArgs e) { }
     }
 }

@@ -67,5 +67,26 @@ namespace RecycleShare
             }
             return userId;
         }
+
+        public NpgsqlConnection GetAuthorizedConnection()
+        {
+            NpgsqlConnection conn = new NpgsqlConnection(connectionString);
+            conn.Open(); // Bağlantıyı açtık
+
+            // Eğer Session'da bir rol tanımlıysa (Login olunmuşsa)
+            if (!string.IsNullOrEmpty(Session.DbRoleName))
+            {
+                // SQL tarafında kimlik değiştiriyoruz
+                string roleQuery = $"SET ROLE {Session.DbRoleName}";
+
+                using (NpgsqlCommand cmd = new NpgsqlCommand(roleQuery, conn))
+                {
+                    cmd.ExecuteNonQuery();
+                }
+            }
+
+            // Hazır, yetkisi kısıtlanmış bağlantıyı geri döndür
+            return conn;
+        }
     }
 }
