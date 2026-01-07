@@ -42,6 +42,22 @@ namespace RecycleShare
                 MessageBox.Show("Giriþ Baþarýlý! Rol: " + rol);
                 this.Hide();
 
+                switch (rol)
+                {
+                    case "admin":
+                        Session.DbRoleName = "admin_role";
+                        break;
+                    case "user":
+                        Session.DbRoleName = "user_role";
+                        break;
+                    case "toplayici":
+                        Session.DbRoleName = "toplayici_role";
+                        break;
+                    default:
+                        Session.DbRoleName = "user_role"; // Varsayılan
+                        break;
+                }
+
                 // Senin veritabanýndaki CHECK constraint'e göre roller: 'admin', 'user', 'toplayici'
                 switch (rol)
                 {
