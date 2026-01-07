@@ -211,7 +211,21 @@ namespace RecycleShare
             {
                 using (NpgsqlConnection conn = new NpgsqlConnection(connectionString))
                 {
+
+                    // 1. Olayı tanımlıyoruz (Notice geldiğinde ne yapılacak?)
+                    conn.Notice += (s, ev) =>
+                    {
+                        // PostgreSQL'den gelen RAISE NOTICE mesajı ev.Notice.MessageText içindedir
+                        MessageBox.Show(ev.Notice.MessageText, "Sistem Mesajı", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    };
+                       
                     conn.Open();
+
+                    // Bu satır hayati önem taşıyor, notice'leri görünür yapar
+                    using (var command = new NpgsqlCommand("SET client_min_messages TO NOTICE;", conn))
+                    {
+                        command.ExecuteNonQuery();
+                    }
 
                     // PostgreSQL fonksiyonunu SELECT ile çağırıyoruz
                     string sql = "SELECT fn_rezervasyon_yap(@atik_id, @alici_id)";
