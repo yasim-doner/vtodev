@@ -43,6 +43,7 @@
             txtBaslik = new TextBox();
             btnAtikEkle = new Button();
             btnRaporGor = new Button();
+            btnExit = new Button();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
@@ -52,6 +53,7 @@
             panel1.Anchor = AnchorStyles.None;
             panel1.BackgroundImage = (Image)resources.GetObject("panel1.BackgroundImage");
             panel1.BackgroundImageLayout = ImageLayout.Stretch;
+            panel1.Controls.Add(btnExit);
             panel1.Controls.Add(txtAciklama);
             panel1.Controls.Add(label2);
             panel1.Controls.Add(label3);
@@ -211,6 +213,18 @@
             btnRaporGor.UseVisualStyleBackColor = false;
             btnRaporGor.Click += btnRaporGor_Click;
             // 
+            // btnExit
+            // 
+            btnExit.BackColor = Color.LightCoral;
+            btnExit.BackgroundImage = (Image)resources.GetObject("btnExit.BackgroundImage");
+            btnExit.BackgroundImageLayout = ImageLayout.Stretch;
+            btnExit.Location = new Point(829, 438);
+            btnExit.Name = "btnExit";
+            btnExit.Size = new Size(52, 52);
+            btnExit.TabIndex = 7;
+            btnExit.UseVisualStyleBackColor = false;
+            btnExit.Click += btnExit_Click;
+            // 
             // UserForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -243,5 +257,6 @@
         private Label label4;
         private Label label5;
         private Button btnRaporGor;
+        private Button btnExit;
     }
 }

@@ -28,12 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AdminForm));
             panel1 = new Panel();
             btnKullanicilar = new Button();
             btnAtiklar = new Button();
             btnIslemler = new Button();
             btnToplama = new Button();
             btnKategori = new Button();
+            btnExit = new Button();
             panel1.SuspendLayout();
             SuspendLayout();
             // 
@@ -110,11 +112,24 @@
             btnKategori.UseVisualStyleBackColor = false;
             btnKategori.Click += btnKategori_Click;
             // 
+            // btnExit
+            // 
+            btnExit.BackColor = Color.Peru;
+            btnExit.BackgroundImage = (Image)resources.GetObject("btnExit.BackgroundImage");
+            btnExit.BackgroundImageLayout = ImageLayout.Stretch;
+            btnExit.Location = new Point(801, 497);
+            btnExit.Name = "btnExit";
+            btnExit.Size = new Size(52, 52);
+            btnExit.TabIndex = 8;
+            btnExit.UseVisualStyleBackColor = false;
+            btnExit.Click += btnExit_Click;
+            // 
             // AdminForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(884, 561);
+            Controls.Add(btnExit);
             Controls.Add(panel1);
             Name = "AdminForm";
             Text = "AdminForm";
@@ -131,5 +146,6 @@
         private Button btnKullanicilar;
         private Button btnAtiklar;
         private Button btnIslemler;
+        private Button btnExit;
     }
 }

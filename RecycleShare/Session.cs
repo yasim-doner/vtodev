@@ -14,5 +14,16 @@ namespace RecycleShare
 
         // Veritabanındaki rol adı (admin_role, user_role, toplayici_role)
         public static string DbRoleName { get; set; }
+
+        public static void Reset()
+        {
+            UserId = 0;
+            UserEmail = null;
+
+            // BURASI KRİTİK: Rolü null yapıyoruz ki, 
+            // DatabaseHelper bir sonraki bağlantıda SET ROLE komutunu çalıştırmasın.
+            // Böylece bağlantı varsayılan (postgres) haline döner.
+            DbRoleName = "admin_role";
+        }
     }
 }

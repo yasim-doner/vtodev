@@ -9,7 +9,7 @@ namespace RecycleShare
     public partial class ToplayiciForm : Form
     {
         // Bağlantı cümlesini buraya kendi bilgilerine göre yaz
-        string connectionString = "Host=localhost;Port=5432;Database=atik;Username=postgres;Password=313131";
+        string connectionString = "Host=localhost;Port=5432;Database=atik;Username=postgres;Password=15995161";
         private int _currentCollectorId;
         public ToplayiciForm(int currentCollectorId)
         {
