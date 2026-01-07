@@ -88,5 +88,48 @@ namespace RecycleShare
             // Hazır, yetkisi kısıtlanmış bağlantıyı geri döndür
             return conn;
         }
+
+        public bool RegisterUser(string ad, string soyad, string email, string sifre, string rol)
+        {
+            using (NpgsqlConnection conn = new NpgsqlConnection(connectionString)) // connectionString sınıfın tepesinde tanımlı zaten
+            {
+                try
+                {
+                    conn.Open();
+                    // Email unique olduğu için aynı mail varsa veritabanı hata fırlatır, onu catch'te yakalarız.
+                    string query = "INSERT INTO kullanicilar (ad, soyad, email, sifre, rol, puan) VALUES (@ad, @soyad, @email, @sifre, @rol, 0)";
+
+                    using (NpgsqlCommand cmd = new NpgsqlCommand(query, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@ad", ad);
+                        cmd.Parameters.AddWithValue("@soyad", soyad);
+                        cmd.Parameters.AddWithValue("@email", email);
+                        cmd.Parameters.AddWithValue("@sifre", sifre);
+                        cmd.Parameters.AddWithValue("@rol", rol); // 'user' veya 'toplayici' gidecek
+
+                        int result = cmd.ExecuteNonQuery();
+                        return result > 0; // Kayıt başarılıysa true döner
+                    }
+                }
+                catch (PostgresException ex)
+                {
+                    // 23505: Unique violation (Bu mail adresi zaten var hatası)
+                    if (ex.SqlState == "23505")
+                    {
+                        System.Windows.Forms.MessageBox.Show("Bu E-Mail adresi zaten kayıtlı!");
+                    }
+                    else
+                    {
+                        System.Windows.Forms.MessageBox.Show("Veritabanı hatası: " + ex.Message);
+                    }
+                    return false;
+                }
+                catch (Exception ex)
+                {
+                    System.Windows.Forms.MessageBox.Show("Genel hata: " + ex.Message);
+                    return false;
+                }
+            }
+        }
     }
 }

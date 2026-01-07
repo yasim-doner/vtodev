@@ -1,3 +1,5 @@
+using RecycleShare.Forms;
+
 namespace RecycleShare
 {
     public partial class Form1 : Form
@@ -17,6 +19,12 @@ namespace RecycleShare
         private void label1_Click(object sender, EventArgs e)
         {
 
+        }
+        private void btnSign_Click(object sender, EventArgs e)
+        {
+            // Kayıt formunu açıyoruz
+            RegisterForm frm = new RegisterForm();
+            frm.ShowDialog(); // ShowDialog kullanıyoruz ki kayıt bitmeden arkadaki login'e basamasınlar
         }
 
         private void btnLogin_Click(object sender, EventArgs e)
