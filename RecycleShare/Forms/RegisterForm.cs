@@ -59,5 +59,10 @@ namespace RecycleShare.Forms
                 this.Close(); // Formu kapat, Login ekranına dön
             }
         }
+
+        private void cmbRol_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

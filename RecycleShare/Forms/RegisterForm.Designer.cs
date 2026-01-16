@@ -34,6 +34,11 @@
             txtSifre = new TextBox();
             cmbRol = new ComboBox();
             btnKaydet = new Button();
+            label3 = new Label();
+            label1 = new Label();
+            label2 = new Label();
+            label4 = new Label();
+            label5 = new Label();
             SuspendLayout();
             // 
             // txtAd
@@ -83,11 +88,66 @@
             btnKaydet.UseVisualStyleBackColor = true;
             btnKaydet.Click += btnKaydet_Click;
             // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            label3.Location = new Point(275, 95);
+            label3.Name = "label3";
+            label3.Size = new Size(22, 15);
+            label3.TabIndex = 11;
+            label3.Text = "Ad";
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            label1.Location = new Point(275, 136);
+            label1.Name = "label1";
+            label1.Size = new Size(40, 15);
+            label1.TabIndex = 12;
+            label1.Text = "Soyad";
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            label2.Location = new Point(275, 179);
+            label2.Name = "label2";
+            label2.Size = new Size(36, 15);
+            label2.TabIndex = 13;
+            label2.Text = "Email";
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            label4.Location = new Point(275, 225);
+            label4.Name = "label4";
+            label4.Size = new Size(34, 15);
+            label4.TabIndex = 14;
+            label4.Text = "Şifre";
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            label5.Location = new Point(275, 270);
+            label5.Name = "label5";
+            label5.Size = new Size(25, 15);
+            label5.TabIndex = 15;
+            label5.Text = "Rol";
+            // 
             // RegisterForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(884, 561);
+            Controls.Add(label5);
+            Controls.Add(label4);
+            Controls.Add(label2);
+            Controls.Add(label1);
+            Controls.Add(label3);
             Controls.Add(btnKaydet);
             Controls.Add(cmbRol);
             Controls.Add(txtSifre);
@@ -108,5 +168,10 @@
         private TextBox txtSifre;
         private ComboBox cmbRol;
         private Button btnKaydet;
+        private Label label3;
+        private Label label1;
+        private Label label2;
+        private Label label4;
+        private Label label5;
     }
 }

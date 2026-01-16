@@ -130,9 +130,9 @@
             label3.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             label3.Location = new Point(203, 93);
             label3.Name = "label3";
-            label3.Size = new Size(60, 15);
+            label3.Size = new Size(65, 15);
             label3.TabIndex = 10;
-            label3.Text = "Tam Adre";
+            label3.Text = "Tam Adres";
             label3.Click += label1_Click;
             // 
             // label4
